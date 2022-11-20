@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Dropdown } from 'semantic-ui-react';
+import { Search, Dropdown, Grid, Card } from 'semantic-ui-react';
 
 export function Restaurants() {
   const [foodTypes, setFoodType] = useState([]);
@@ -65,7 +65,26 @@ export function Restaurants() {
         ) : null}
         <Search placeholder='Search Restaurants' />
       </div>
-      <div style={{ minHeight: '80%', width: '100%' }}> Restaurants List</div>
+      <div style={{ minHeight: '80%', width: '100%' }}>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 20,
+            padding: 15,
+          }}
+        >
+          {restaurants.length
+            ? restaurants.map((restaurant: any) => (
+                <Card
+                  style={{ height: 50 }}
+                  header={restaurant.name}
+                />
+              ))
+            : null}
+        </div>
+      </div>
     </div>
   );
 }
