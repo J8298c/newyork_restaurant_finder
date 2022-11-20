@@ -3,25 +3,31 @@ import { Search, Dropdown } from 'semantic-ui-react';
 
 export function Restaurants() {
   const [foodTypes, setFoodType] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
   const [selectedFoodType, setSelectedFoodType] = useState('');
   useEffect(() => {
     (async function () {
-      console.log('fetching food types and restaurants');
+      try {
+        const data = await fetch(
+          'http://localhost:3001/api/restaurants/get_restaurants/11420'
+        ).then((res) => res.json());
+        setRestaurants(data.restaurants);
+
+        const foodTypesData = await fetch(
+          'http://localhost:3001/api/attrs/get_food_types'
+        ).then((res) => res.json());
+        console.log(foodTypesData);
+        const cuisines = foodTypesData.food_types.map((type: string) => ({
+          key: type,
+          value: type,
+          text: type,
+        }));
+        setFoodType(cuisines);
+      } catch (err) {
+        console.error(err);
+      }
     })();
   }, []);
-
-  const options = [
-    {
-      key: 'american',
-      text: 'American',
-      value: 'american',
-    },
-    {
-      key: 'italian',
-      text: 'Italian',
-      value: 'italian',
-    },
-  ];
 
   const handleOptionChange = (e: any, data: any) => {
     setSelectedFoodType(data.value);
@@ -50,11 +56,13 @@ export function Restaurants() {
           paddingRight: 40,
         }}
       >
-        <Dropdown
-          options={options}
-          placeholder='Pick your food type'
-          onChange={handleOptionChange}
-        />
+        {foodTypes.length ? (
+          <Dropdown
+            options={foodTypes}
+            placeholder='Pick your food type'
+            onChange={handleOptionChange}
+          />
+        ) : null}
         <Search placeholder='Search Restaurants' />
       </div>
       <div style={{ minHeight: '80%', width: '100%' }}> Restaurants List</div>
