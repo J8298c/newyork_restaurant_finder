@@ -25,6 +25,8 @@ export function Restaurants() {
 
   const handleOptionChange = (e: any, data: any) => {
     setSelectedFoodType(data.value);
+    console.log(data.value);
+    console.log(selectedFoodType, 'the selected food type');
   };
 
   return (
