@@ -3,7 +3,7 @@ import { Search, Dropdown } from 'semantic-ui-react';
 
 export function Restaurants() {
   const [foodTypes, setFoodType] = useState([]);
-
+  const [selectedFoodType, setSelectedFoodType] = useState('');
   useEffect(() => {
     (async function () {
       console.log('fetching food types and restaurants');
@@ -24,8 +24,7 @@ export function Restaurants() {
   ];
 
   const handleOptionChange = (e: any, data: any) => {
-    console.log(e);
-    console.log(data.value);
+    setSelectedFoodType(data.value);
   };
 
   return (
