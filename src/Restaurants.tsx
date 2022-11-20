@@ -1,21 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function Restaurants() {
+  const [foodTypes, setFoodType] = useState([]);
 
-    const [foodTypes, setFoodType] = useState([])
+  useEffect(() => {
+    (async function () {
+      console.log('fetching food types and restaurants');
+    })();
+  }, []);
 
-    useEffect(() => {
-        (
-            async function() {
-                console.log('fetching food types and restaurants')
-            }
-        )()
-    }, [])
-
-    return (
-        <div style={{display: "flex", flexDirection: 'row', minWidth: '100vw', minHeight: "100vh"}}>
-            <div style={{width: '25%', background: 'blue'}}></div>
-            <div style={{width: '75%', background: 'red'}}></div>
-        </div>
-    )
+  return (
+    <div
+      style={{
+        minWidth: '100vw',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <div style={{ minHeight: '20%', width: '100%', background: 'red' }}>
+        Top Nav
+      </div>
+      <div style={{ minHeight: '80%', width: '100%' }}> Restaurants List</div>
+    </div>
+  );
 }
