@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Search, Dropdown } from 'semantic-ui-react';
 
 export function Restaurants() {
   const [foodTypes, setFoodType] = useState([]);
@@ -9,17 +10,51 @@ export function Restaurants() {
     })();
   }, []);
 
+  const options = [
+    {
+      key: 'american',
+      text: 'American',
+      value: 'american',
+    },
+    {
+      key: 'italian',
+      text: 'Italian',
+      value: 'italian',
+    },
+  ];
+
+  const handleOptionChange = (e: any, data: any) => {
+    console.log(e);
+    console.log(data.value);
+  };
+
   return (
     <div
       style={{
         minWidth: '100vw',
-        minHeight: '100vh',
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
-      <div style={{ minHeight: '20%', width: '100%', background: 'red' }}>
-        Top Nav
+      <div
+        style={{
+          border: '1px solid',
+          minHeight: '20%',
+          width: '100%',
+          display: 'flex',
+          gap: 100,
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          paddingRight: 40,
+        }}
+      >
+        <Dropdown
+          options={options}
+          placeholder='Pick your food type'
+          onChange={handleOptionChange}
+        />
+        <Search placeholder='Search Restaurants' />
       </div>
       <div style={{ minHeight: '80%', width: '100%' }}> Restaurants List</div>
     </div>
